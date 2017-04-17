@@ -1,8 +1,9 @@
-pragma solidity ^0.4.2;
-contract owned {
+pragma solidity ^0.4.8;
+
+contract Owned {
     address public owner;
 
-    function owned() {
+    function Owned() {
         owner = msg.sender;
     }
 
@@ -16,9 +17,13 @@ contract owned {
     }
 }
 
-contract tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData); }
 
-contract token {
+contract TokenRecipient { 
+    function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData);
+}
+
+
+contract Token {
     /* Public variables of the token */
     string public standard = 'Token 0.1';
     string public name;
@@ -34,12 +39,12 @@ contract token {
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     /* Initializes contract with initial supply tokens to the creator of the contract */
-    function token(
+    function Token(
         uint256 initialSupply,
         string tokenName,
         uint8 decimalUnits,
         string tokenSymbol
-        ) {
+    ) {
         balanceOf[msg.sender] = initialSupply;              // Give the creator all initial tokens
         totalSupply = initialSupply;                        // Update total supply
         name = tokenName;                                   // Set the name for display purposes
@@ -60,14 +65,14 @@ contract token {
     function approve(address _spender, uint256 _value)
         returns (bool success) {
         allowance[msg.sender][_spender] = _value;
-        tokenRecipient spender = tokenRecipient(_spender);
+        TokenRecipient spender = TokenRecipient(_spender);
         return true;
     }
 
     /* Approve and then comunicate the approved contract in a single tx */
     function approveAndCall(address _spender, uint256 _value, bytes _extraData)
         returns (bool success) {
-        tokenRecipient spender = tokenRecipient(_spender);
+        TokenRecipient spender = TokenRecipient(_spender);
         if (approve(_spender, _value)) {
             spender.receiveApproval(msg.sender, _value, this, _extraData);
             return true;
@@ -92,7 +97,7 @@ contract token {
     }
 }
 
-contract RareToken is owned, token {
+contract RareToken is Owned, Token {
 
     uint256 public sellPrice;
     uint256 public buyPrice;
@@ -110,8 +115,8 @@ contract RareToken is owned, token {
         uint8 decimalUnits,
         string tokenSymbol,
         address centralMinter
-    ) token (initialSupply, tokenName, decimalUnits, tokenSymbol) {
-        if(centralMinter != 0 ) owner = centralMinter;      // Sets the owner as specified (if centralMinter is not specified the owner is msg.sender)
+    ) Token (initialSupply, tokenName, decimalUnits, tokenSymbol) {
+        if (centralMinter != 0 ) owner = centralMinter;      // Sets the owner as specified (if centralMinter is not specified the owner is msg.sender)
         balanceOf[owner] = initialSupply;                   // Give the owner all initial tokens
     }
 
@@ -124,7 +129,6 @@ contract RareToken is owned, token {
         balanceOf[_to] += _value;                            // Add the same to the recipient
         Transfer(msg.sender, _to, _value);                   // Notify anyone listening that this transfer took place
     }
-
 
     /* A contract attempts to get the coins */
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
@@ -149,7 +153,7 @@ contract RareToken is owned, token {
     function deflateToken(address target, uint256 mintedAmount) onlyOwner {
         balanceOf[target] -= mintedAmount;
         totalSupply -= mintedAmount;
-
+        Transfer(target, 0, mintedAmount);
     }
 
     function freezeAccount(address target, bool freeze) onlyOwner {
