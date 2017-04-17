@@ -1,0 +1,2 @@
+# RAREPeperiumToken
+RARE Peperium Token
