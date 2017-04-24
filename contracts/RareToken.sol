@@ -100,14 +100,8 @@ contract Token {
 }
 
 contract RareToken is Owned, Token {
-    /* Initializes contract with initial supply tokens to the creator of the contract */
-    function RareToken(
-        uint256 initialSupply,
-        string tokenName,
-        uint8 decimalUnits,
-        string tokenSymbol
-    ) Token (initialSupply, tokenName, decimalUnits, tokenSymbol) {
-    }
+    /* 100,000,000 tokens, 8 decimal places */
+    function RareToken() Token (10000000000000000, "RARE", 8, "R$") {}
 
     function burnTokens(uint256 _value) onlyOwner {
         if (balanceOf[owner] < _value) throw;       // Check if the sender has enough
