@@ -83,9 +83,9 @@ contract Token {
 
     /* A contract attempts to get the coins */
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
-        if (balanceOf[_from] < _value) throw;                 // Check if the sender has enough
-        if (balanceOf[_to] + _value < balanceOf[_to]) throw;  // Check for overflows
-        if (_value > allowance[_from][msg.sender]) throw;   // Check allowance
+        if (balanceOf[_from] < _value) throw;                // Check if the sender has enough
+        if (balanceOf[_to] + _value < balanceOf[_to]) throw; // Check for overflows
+        if (_value > allowance[_from][msg.sender]) throw;    // Check allowance
         balanceOf[_from] -= _value;                          // Subtract from the sender
         balanceOf[_to] += _value;                            // Add the same to the recipient
         allowance[_from][msg.sender] -= _value;
@@ -95,7 +95,7 @@ contract Token {
 
     /* This unnamed function is called whenever someone tries to send ether to it */
     function () {
-        throw;     // Prevents accidental sending of ether
+        throw;                                               // Prevents accidental sending of ether
     }
 }
 
@@ -104,7 +104,7 @@ contract RareToken is Owned, Token {
     function RareToken() Token (10000000000000000, "RARE", 8, "R$") {}
 
     function burnTokens(uint256 _value) onlyOwner {
-        if (balanceOf[owner] < _value) throw;       // Check if the sender has enough
+        if (balanceOf[owner] < _value) throw;                // Check if the sender has enough
         balanceOf[owner] -= _value;
         totalSupply -= _value;
         Transfer(owner, 0, _value);
