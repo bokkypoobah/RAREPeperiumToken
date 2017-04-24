@@ -19,6 +19,6 @@ I have offered to fix, test and audit the code, so here is the repository.
 
 ## Actions
 
-#1
-#2
-#3
+* https://github.com/bokkypoobah/RAREPeperiumToken/issues/1
+* https://github.com/bokkypoobah/RAREPeperiumToken/issues/2
+* https://github.com/bokkypoobah/RAREPeperiumToken/issues/3
