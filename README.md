@@ -15,3 +15,10 @@ I have offered to fix, test and audit the code, so here is the repository.
 ## Conversation with Michael C Apr 24 2017
 
 * Initial supply is 100 million units with 8 decimals, it is same as totalSupply
+
+
+## Actions
+
+#1
+#2
+#3
