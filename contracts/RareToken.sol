@@ -113,6 +113,6 @@ contract RareToken is Owned, Token {
         if (balanceOf[owner] < _value) throw;       // Check if the sender has enough
         balanceOf[owner] -= _value;
         totalSupply -= _value;
-        Transfer(target, 0, _value);
+        Transfer(owner, 0, _value);
     }
 }
