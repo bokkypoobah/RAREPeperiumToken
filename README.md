@@ -19,6 +19,6 @@ I have offered to fix, test and audit the code, so here is the repository.
 
 ## Actions
 
-* https://github.com/bokkypoobah/RAREPeperiumToken/issues/1
-* https://github.com/bokkypoobah/RAREPeperiumToken/issues/2
-* https://github.com/bokkypoobah/RAREPeperiumToken/issues/3
+* [#1 Remove the mintToken(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/1)
+* [#2 Fix the totalSupply issue](https://github.com/bokkypoobah/RAREPeperiumToken/issues/2)
+* [#3 Remove freezeAccount(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/3)
