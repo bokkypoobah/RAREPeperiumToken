@@ -1,10 +1,60 @@
-pragma solidity ^0.4.9;
+# Fixing And Security Auditing The RARE Peperium Token (Work in progress)
 
-// ----------------------------------------------------------------------------------------------
-// The new RARE token contract
-//
-// Enjoy. (c) Michael C and BokkyPooBah / Bok Consulting Pty Ltd 2017. The MIT Licence.
-// ----------------------------------------------------------------------------------------------
+Michael C, the owner of the R$ RARE token at [0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437](https://etherscan.io/address/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437) had troubles listing the R$ tokens for sale and purchase on https://cryptoderivatives.market/ . [EtherScan](https://etherscan.io/token/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437) displays an "Oops" error while [Ethplorer](https://ethplorer.io/address/0x584aa8297edfcb7d8853a426bb0f5252c4af9437) displayed a Total Supply of 1.157920892373162e+69 R$ .
+
+The original contract code can be found at [contracts/RARE_original.sol](contracts/RARE_original.sol).
+
+I offered to fix, test and audit the R$ token code. The fixed contract can be found at [contracts/RAREToken.sol](contracts/RAREToken.sol).
+
+<br />
+
+<hr />
+
+**Table of contents**
+* [Background And History](#background-and-history)
+* [Security Overview Of The RAREToken Contract](#security-overview-of-the-raretoken-contract)
+  * [Other Notes](#other-notes)
+* [Comments On The Source Code](#comments-on-the-source-code)
+* [References](#references)
+
+
+<br />
+
+<hr />
+
+## Background And History
+* Apr 24 2017 Michael C agreed for the unnecessary `mintToken(...)`, `freezeAccount(...)`, `approveAndCall(...)`, `buy()`, `sell(...)` and `setPrices(...)` functions to be removed.
+* May 08 2017 Bok Consulting completed (almost) the changes to [contracts/RAREToken.sol](contracts/RAREToken.sol) and the test script [test/01_test1.sh](test/01_test1.sh) with the generated result documented in [test/test1results.txt](test/test1results.txt)
+* May 09 2017 Bok Consulting completed this security audit report
+
+<br />
+
+<hr />
+
+## Security Overview Of The RAREToken Contract
+* [x] The smart contract has been kept relatively simple
+* [x] The code has been tested for the normal use cases, and around the boundary cases
+* [x] The testing has been done using geth 1.5.9-stable and solc 0.4.9+commit.364da425.Darwin.appleclang instead of one of the testing frameworks and JavaScript VMs to simulate the live environment as closely as possible
+* [x] The `approveAndCall(...)` function has been removed as the side effects of this function has not been evaluated fully
+* [x] There is no logic with potential division by zero errors
+* [x] All numbers used are uint256 (with the exception of `decimals`), reducing the risk of errors from type conversions
+* [x] Areas with potential overflow errors in `transfer(...)` and `transferFrom(...)` have the logic to prevent overflows
+* [x] Areas with potential underflow errors in `transfer(...)` and `transferFrom(...)` have the logic to prevent underflows
+* [x] Function and event names are differentiated by case - function names begin with a lowercase character and event names begin with an uppercase character
+
+### Other Notes
+
+
+<br />
+
+<hr />
+
+## Comments On The Source Code
+
+My comments in the following code are market in the lines beginning with `// NOTE: `
+
+```javascript
+pragma solidity ^0.4.9;
 
 contract Owned {
     address public owner;
@@ -133,3 +183,16 @@ contract RareToken is ERC20Token {
         Transfer(owner, 0, _value);
     }
 }
+```
+
+<br />
+
+<hr />
+
+## References
+
+* [Ethereum Contract Security Techniques and Tips](https://github.com/ConsenSys/smart-contract-best-practices)
+
+<br />
+
+(c) BokkyPooBah / Bok Consulting Pty Ltd - May 09 2017

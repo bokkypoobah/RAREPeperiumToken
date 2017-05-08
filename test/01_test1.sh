@@ -119,6 +119,7 @@ failIfGasEqualsGasUsed(tx14_2, testMessage + " - Accept ownership");
 printContractDynamicDetails();
 console.log("RESULT: ");
 
+
 exit;
 
 
