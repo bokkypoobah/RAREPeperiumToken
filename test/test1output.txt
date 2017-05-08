@@ -1,0 +1,222 @@
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.6.0-stable-facc47cb/darwin-amd64/go1.8.1
+coinbase: 0x000d1009bd8f0b1301cc5edc28ed1222a3ce671e
+at block: 945 (Mon, 08 May 2017 22:07:35 AEST)
+ datadir: /Users/bok/Projects/RAREPeperiumToken/test/testchain
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> 
+true
+> 
+true
+> 
+> 
+undefined
+> 
+undefined
+> 
+> 
+DATA: tokenABI=[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_amount","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"burnTokens","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"payable":false,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}]
+undefined
+> 
+> 
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                Token Name
+RESULT:  1 0x000d1009bd8f0b1301cc5edc28ed1222a3ce671e       15.000000000000000000           0.00000000 Account #0 - Miner
+RESULT:  2 0x0014060ff383c9b21c6840a3b14aab06741e5c49        0.000000000000000000           0.00000000 Account #1 - Token Owner
+RESULT:  3 0x0020017ba4c67f76c76b1af8c41821ee54f37171        0.000000000000000000           0.00000000 Account #2 - Factory Owner
+RESULT:  4 0x0036f6addb6d64684390f55a92f0f4988266901b        0.000000000000000000           0.00000000 Account #3 - Maker 1 Account
+RESULT:  5 0x004e64833635cd1056b948b57286b7c91e62731c        0.000000000000000000           0.00000000 Account #4 - Maker 2 Account
+RESULT:  6 0x0055fbc1ada89056088c75eaf50400af6756ae61        0.000000000000000000           0.00000000 Account #5 - Taker 1 Account
+RESULT:  7 0x006b2baf3000413d83d257086fd3434a109aa552        0.000000000000000000           0.00000000 Account #6 - Taker 2 Account
+undefined
+> 
+> 
+undefined
+> 
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Test 1.1 Deploy Token Contract
+undefined
+> 
+> 
+undefined
+> 
+... 
+...... 
+......... 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+......... 
+...... 
+... 
+{
+  abi: [{
+      constant: true,
+      inputs: [],
+      name: "name",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: false,
+      inputs: [{...}, {...}],
+      name: "approve",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: true,
+      inputs: [],
+      name: "totalSupply",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: false,
+      inputs: [{...}, {...}, {...}],
+      name: "transferFrom",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: true,
+      inputs: [],
+      name: "decimals",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: false,
+      inputs: [{...}],
+      name: "burnTokens",
+      outputs: [],
+      payable: false,
+      type: "function"
+  }, {
+      constant: true,
+      inputs: [{...}],
+      name: "balanceOf",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: false,
+      inputs: [],
+      name: "acceptOwnership",
+      outputs: [],
+      payable: false,
+      type: "function"
+  }, {
+      constant: true,
+      inputs: [],
+      name: "owner",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: true,
+      inputs: [],
+      name: "symbol",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: false,
+      inputs: [{...}, {...}],
+      name: "transfer",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: true,
+      inputs: [],
+      name: "newOwner",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: true,
+      inputs: [{...}, {...}],
+      name: "allowance",
+      outputs: [{...}],
+      payable: false,
+      type: "function"
+  }, {
+      constant: false,
+      inputs: [{...}],
+      name: "transferOwnership",
+      outputs: [],
+      payable: false,
+      type: "function"
+  }, {
+      inputs: [],
+      payable: false,
+      type: "constructor"
+  }, {
+      payable: false,
+      type: "fallback"
+  }, {
+      anonymous: false,
+      inputs: [{...}, {...}, {...}],
+      name: "Transfer",
+      type: "event"
+  }, {
+      anonymous: false,
+      inputs: [{...}, {...}, {...}],
+      name: "Approval",
+      type: "event"
+  }, {
+      anonymous: false,
+      inputs: [{...}, {...}],
+      name: "OwnershipTransferred",
+      type: "event"
+  }],
+  address: undefined,
+  transactionHash: "0x01444b08bc20bae37fa81a505536f3ea029b41bed56ebbf510e8e3f707d2529c"
+}
+> 
+... 
+undefined
+> 
+DATA: tokenAddress=0x6d5e7c2b3657f2ee3c34327e2a02d0d0846b7830
+RESULT: tokenAddress=0x6d5e7c2b3657f2ee3c34327e2a02d0d0846b7830 gas=4000000 gasUsed=838146 cost=0.01676292 block=950 txId=0x01444b08bc20bae37fa81a505536f3ea029b41bed56ebbf510e8e3f707d2529c
+RESULT:  # Account                                             EtherBalanceChange                Token Name
+RESULT:  1 0x000d1009bd8f0b1301cc5edc28ed1222a3ce671e       25.016762920000000000           0.00000000 Account #0 - Miner
+RESULT:  2 0x0014060ff383c9b21c6840a3b14aab06741e5c49       -0.016762920000000000   100000000.00000000 Account #1 - Token Owner
+RESULT:  3 0x0020017ba4c67f76c76b1af8c41821ee54f37171        0.000000000000000000           0.00000000 Account #2 - Factory Owner
+RESULT:  4 0x0036f6addb6d64684390f55a92f0f4988266901b        0.000000000000000000           0.00000000 Account #3 - Maker 1 Account
+RESULT:  5 0x004e64833635cd1056b948b57286b7c91e62731c        0.000000000000000000           0.00000000 Account #4 - Maker 2 Account
+RESULT:  6 0x0055fbc1ada89056088c75eaf50400af6756ae61        0.000000000000000000           0.00000000 Account #5 - Taker 1 Account
+RESULT:  7 0x006b2baf3000413d83d257086fd3434a109aa552        0.000000000000000000           0.00000000 Account #6 - Taker 2 Account
+RESULT:  8 0x6d5e7c2b3657f2ee3c34327e2a02d0d0846b7830        0.000000000000000000           0.00000000 TOKEN
+undefined
+> 
+RESULT: PASS Test 1.1 Deploy Token Contract
+1
+> 
+RESULT: contract.symbol=RARE
+RESULT: contract.name=RARE
+RESULT: contract.decimals=8
+RESULT: contract.totalSupply=100000000
+undefined
+> 
+RESULT: contract.owner=0x0014060ff383c9b21c6840a3b14aab06741e5c49
+RESULT: contract.newOwner=0x0000000000000000000000000000000000000000
+ReferenceError: 'exit' is not defined
+    at printContractDynamicDetails (functions.js:159:3)
+    at <anonymous>:1:1
+
+> 
+> 

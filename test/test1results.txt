@@ -1,0 +1,26 @@
+ # Account                                             EtherBalanceChange                Token Name
+ 1 0x000d1009bd8f0b1301cc5edc28ed1222a3ce671e       15.000000000000000000           0.00000000 Account #0 - Miner
+ 2 0x0014060ff383c9b21c6840a3b14aab06741e5c49        0.000000000000000000           0.00000000 Account #1 - Token Owner
+ 3 0x0020017ba4c67f76c76b1af8c41821ee54f37171        0.000000000000000000           0.00000000 Account #2 - Factory Owner
+ 4 0x0036f6addb6d64684390f55a92f0f4988266901b        0.000000000000000000           0.00000000 Account #3 - Maker 1 Account
+ 5 0x004e64833635cd1056b948b57286b7c91e62731c        0.000000000000000000           0.00000000 Account #4 - Maker 2 Account
+ 6 0x0055fbc1ada89056088c75eaf50400af6756ae61        0.000000000000000000           0.00000000 Account #5 - Taker 1 Account
+ 7 0x006b2baf3000413d83d257086fd3434a109aa552        0.000000000000000000           0.00000000 Account #6 - Taker 2 Account
+Test 1.1 Deploy Token Contract
+tokenAddress=0x6d5e7c2b3657f2ee3c34327e2a02d0d0846b7830 gas=4000000 gasUsed=838146 cost=0.01676292 block=950 txId=0x01444b08bc20bae37fa81a505536f3ea029b41bed56ebbf510e8e3f707d2529c
+ # Account                                             EtherBalanceChange                Token Name
+ 1 0x000d1009bd8f0b1301cc5edc28ed1222a3ce671e       25.016762920000000000           0.00000000 Account #0 - Miner
+ 2 0x0014060ff383c9b21c6840a3b14aab06741e5c49       -0.016762920000000000   100000000.00000000 Account #1 - Token Owner
+ 3 0x0020017ba4c67f76c76b1af8c41821ee54f37171        0.000000000000000000           0.00000000 Account #2 - Factory Owner
+ 4 0x0036f6addb6d64684390f55a92f0f4988266901b        0.000000000000000000           0.00000000 Account #3 - Maker 1 Account
+ 5 0x004e64833635cd1056b948b57286b7c91e62731c        0.000000000000000000           0.00000000 Account #4 - Maker 2 Account
+ 6 0x0055fbc1ada89056088c75eaf50400af6756ae61        0.000000000000000000           0.00000000 Account #5 - Taker 1 Account
+ 7 0x006b2baf3000413d83d257086fd3434a109aa552        0.000000000000000000           0.00000000 Account #6 - Taker 2 Account
+ 8 0x6d5e7c2b3657f2ee3c34327e2a02d0d0846b7830        0.000000000000000000           0.00000000 TOKEN
+PASS Test 1.1 Deploy Token Contract
+contract.symbol=RARE
+contract.name=RARE
+contract.decimals=8
+contract.totalSupply=100000000
+contract.owner=0x0014060ff383c9b21c6840a3b14aab06741e5c49
+contract.newOwner=0x0000000000000000000000000000000000000000
