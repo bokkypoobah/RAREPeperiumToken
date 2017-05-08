@@ -3,18 +3,19 @@ var accountNames = {};
 
 addAccount(eth.accounts[0], "Account #0 - Miner");
 addAccount(eth.accounts[1], "Account #1 - Token Owner");
-addAccount(eth.accounts[2], "Account #2 - Factory Owner");
-addAccount(eth.accounts[3], "Account #3 - Maker 1 Account");
-addAccount(eth.accounts[4], "Account #4 - Maker 2 Account");
-addAccount(eth.accounts[5], "Account #5 - Taker 1 Account");
-addAccount(eth.accounts[6], "Account #6 - Taker 2 Account");
+addAccount(eth.accounts[2], "Account #2");
+addAccount(eth.accounts[3], "Account #3");
+addAccount(eth.accounts[4], "Account #4");
+addAccount(eth.accounts[5], "Account #5");
+addAccount(eth.accounts[6], "Account #6");
 
+var minerAccount = eth.accounts[0];
 var tokenOwnerAccount = eth.accounts[1];
-var factoryOwnerAccount = eth.accounts[2];
-var maker1Account = eth.accounts[3];
-var maker2Account = eth.accounts[4];
-var taker1Account = eth.accounts[5];
-var taker2Account = eth.accounts[6];
+var account2 = eth.accounts[2];
+var account3 = eth.accounts[3];
+var account4 = eth.accounts[4];
+var account5 = eth.accounts[5];
+var account6 = eth.accounts[6];
 
 var baseBlock = eth.blockNumber;
 var tokenABIFragment=[{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"}];
@@ -146,39 +147,42 @@ function addContractAddressAndAbi(address, abi) {
 
 function printContractStaticDetails() {
   var contract = eth.contract(contractAbi).at(contractAddress);
-  console.log("RESULT: contract.symbol=" + contract.symbol());
-  console.log("RESULT: contract.name=" + contract.name());
-  console.log("RESULT: contract.decimals=" + contract.decimals());
-  console.log("RESULT: contract.totalSupply=" + contract.totalSupply().div(1e8));
+  console.log("RESULT: token.symbol=" + contract.symbol());
+  console.log("RESULT: token.name=" + contract.name());
+  console.log("RESULT: token.decimals=" + contract.decimals());
+  console.log("RESULT: token.totalSupply=" + contract.totalSupply().div(1e8));
 }
 
+var dynamicDetailsFromBlock = 0;
 function printContractDynamicDetails() {
   var contract = eth.contract(contractAbi).at(contractAddress);
-  console.log("RESULT: contract.owner=" + contract.owner());
-  console.log("RESULT: contract.newOwner=" + contract.newOwner());
-  exit;
+  console.log("RESULT: token.owner=" + contract.owner());
+  console.log("RESULT: token.newOwner=" + contract.newOwner());
+
+  var latestBlock = eth.blockNumber;
   var i;
-  var contract = eth.contract(contractAbi).at(contractAddress);
-  var numberOfDepositContracts = contract.numberOfDepositContracts();
-  console.log("RESULT: contract.numberOfDepositContracts=" + numberOfDepositContracts);
-  for (i = 0; i < numberOfDepositContracts; i++) {
-    console.log("RESULT: contract.depositContracts(" + i + ") " + contract.depositContracts(i))
-  }
-  var totalDeposits = contract.totalDeposits();
-  console.log("RESULT: contract.totalDeposits=" + web3.fromWei(totalDeposits, "ether"));
-  var depositContractCreatedEvent = contract.DepositContractCreated({}, { fromBlock: 0, toBlock: "latest" });
+  var ownershipTransferredEvent = contract.OwnershipTransferred({}, { fromBlock: dynamicDetailsFromBlock, toBlock: latestBlock });
   i = 0;
-  depositContractCreatedEvent.watch(function (error, result) {
-    console.log("RESULT: DepositContractCreated Event " + i++ + ": " + result.args.depositContract + " " + result.args.number +
-      " block " + result.blockNumber);
+  ownershipTransferredEvent.watch(function (error, result) {
+    console.log("RESULT: OwnershipTransferred Event " + i++ + ": from=" + result.args._from + " to=" + result.args._to + " " + 
+      result.blockNumber);
   });
-  depositContractCreatedEvent.stopWatching();
-  var depositReceivedEvent = contract.DepositReceived({}, { fromBlock: 0, toBlock: "latest" });
+  ownershipTransferredEvent.stopWatching();
+
+  var approvalEvent = contract.Approval({}, { fromBlock: dynamicDetailsFromBlock, toBlock: latestBlock });
   i = 0;
-  depositReceivedEvent.watch(function (error, result) {
-    console.log("RESULT: DepositReceived Event " + i++ + ": " + result.args.depositOrigin + " " + result.args.depositContract +
-      " " + web3.fromWei(result.args._value, "ether") + " ETH block " + result.blockNumber);
-    // console.log("RESULT: DepositReceived Event " + i++ + ": " + JSON.stringify(result));
+  approvalEvent.watch(function (error, result) {
+    console.log("RESULT: Approval Event " + i++ + ": owner=" + result.args._owner + " spender=" + result.args._spender + " " + 
+      result.args._value.div(1e8) + " block=" + result.blockNumber);
   });
-  depositReceivedEvent.stopWatching();
+  approvalEvent.stopWatching();
+  
+  var transferEvent = contract.Transfer({}, { fromBlock: dynamicDetailsFromBlock, toBlock: latestBlock });
+  i = 0;
+  transferEvent.watch(function (error, result) {
+    console.log("RESULT: Transfer Event " + i++ + ": from=" + result.args.from + " to=" + result.args.to +
+      " value=" + result.args.value.div(1e8) + " block=" + result.blockNumber);
+  });
+  transferEvent.stopWatching();
+  dynamicDetailsFromBlock = latestBlock + 1;
 }

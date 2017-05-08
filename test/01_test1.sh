@@ -67,85 +67,62 @@ failIfGasEqualsGasUsed(tokenTx, testMessage);
 printContractStaticDetails();
 printContractDynamicDetails();
 
-exit;
 
 // -----------------------------------------------------------------------------
-var testMessage = "Setup 1.2 Tokens";
+var testMessage = "Test 1.2 Initial Transfer Of Tokens";
 console.log("RESULT: " + testMessage);
-var tx12_0_m1 = eth.sendTransaction({from: maker1Account, to: token0Address, gas: 400000, value: "1000"});                     // 1000
-var tx12_1_m1 = eth.sendTransaction({from: maker1Account, to: token1Address, gas: 400000, value: "10000"});                    // 1000.0
-var tx12_2_m1 = eth.sendTransaction({from: maker1Account, to: token2Address, gas: 400000, value: "100000"});                   // 1000.00
-var tx12_8_m1 = eth.sendTransaction({from: maker1Account, to: token8Address, gas: 400000, value: "100000000000"});             // 1000.00000000
-var tx12_18_m1 = eth.sendTransaction({from: maker1Account, to: token18Address, gas: 400000, value: "1000000000000000000000"}); // 1000.000000000000000000
-var tx12_0_m2 = eth.sendTransaction({from: maker2Account, to: token0Address, gas: 400000, value: "1000"});                     // 1000
-var tx12_1_m2 = eth.sendTransaction({from: maker2Account, to: token1Address, gas: 400000, value: "10000"});                    // 1000.0
-var tx12_2_m2 = eth.sendTransaction({from: maker2Account, to: token2Address, gas: 400000, value: "100000"});                   // 1000.00
-var tx12_8_m2 = eth.sendTransaction({from: maker2Account, to: token8Address, gas: 400000, value: "100000000000"});             // 1000.00000000
-var tx12_18_m2 = eth.sendTransaction({from: maker2Account, to: token18Address, gas: 400000, value: "1000000000000000000000"}); // 1000.000000000000000000
+var tx12_1 = token.transfer(account2, "100000000000", {from: tokenOwnerAccount, gas: 100000});
+var tx12_2 = token.transfer(account3, "100000000000", {from: tokenOwnerAccount, gas: 100000});
+var tx12_3 = token.transfer(account4, "100000000000", {from: tokenOwnerAccount, gas: 100000});
 while (txpool.status.pending > 0) {
 }
-printTxData("tx12_0_m1", tx12_0_m1);
-printTxData("tx12_1_m1", tx12_1_m1);
-printTxData("tx12_2_m1", tx12_2_m1);
-printTxData("tx12_8_m1", tx12_8_m1);
-printTxData("tx12_18_m1", tx12_18_m1);
-printTxData("tx12_0_m2", tx12_0_m2);
-printTxData("tx12_1_m2", tx12_1_m2);
-printTxData("tx12_2_m2", tx12_2_m2);
-printTxData("tx12_8_m2", tx12_8_m2);
-printTxData("tx12_18_m2", tx12_18_m2);
+printTxData("tx12_1", tx12_1);
+printTxData("tx12_2", tx12_2);
+printTxData("tx12_3", tx12_3);
 printBalances();
-failIfGasEqualsGasUsed(tx12_0_m1, testMessage + " Token0");
-failIfGasEqualsGasUsed(tx12_1_m1, testMessage + " Token1");
-failIfGasEqualsGasUsed(tx12_2_m1, testMessage + " Token2");
-failIfGasEqualsGasUsed(tx12_8_m1, testMessage + " Token8");
-failIfGasEqualsGasUsed(tx12_18_m1, testMessage + " Token18");
-failIfGasEqualsGasUsed(tx12_0_m2, testMessage + " Token0");
-failIfGasEqualsGasUsed(tx12_1_m2, testMessage + " Token1");
-failIfGasEqualsGasUsed(tx12_2_m2, testMessage + " Token2");
-failIfGasEqualsGasUsed(tx12_8_m2, testMessage + " Token8");
-failIfGasEqualsGasUsed(tx12_18_m2, testMessage + " Token18");
+failIfGasEqualsGasUsed(tx12_1, testMessage + " -> Account #2");
+failIfGasEqualsGasUsed(tx12_2, testMessage + " -> Account #3");
+failIfGasEqualsGasUsed(tx12_3, testMessage + " -> Account #4");
+printContractDynamicDetails();
 console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
-var testMessage = "Setup 1.3 Trader Contracts";
+var testMessage = "Test 1.3 Execute Invalid Functions - sending ethers to token contract; sending more tokens than owned";
 console.log("RESULT: " + testMessage);
-var startBlock = eth.blockNumber;
-var tx13_0 = tokenTraderFactory.createTradeContract(token0Address, "11111000000000000000000", "22222000000000000000000", "10000", true, true, {from: maker1Account, gas: 1000000});
-var tx13_1 = tokenTraderFactory.createTradeContract(token1Address, "1111100000000000000000", "2222200000000000000000", "10000", true, true, {from: maker1Account, gas: 1000000});
-var tx13_2 = tokenTraderFactory.createTradeContract(token2Address, "111110000000000000000", "222220000000000000000", "10000", true, true, {from: maker1Account, gas: 1000000});
-var tx13_8 = tokenTraderFactory.createTradeContract(token8Address, "111110000000000", "222220000000000", "10000", true, true, {from: maker1Account, gas: 1000000});
-var tx13_18 = tokenTraderFactory.createTradeContract(token18Address, "11111", "22222", "10000", true, true, {from: maker1Account, gas: 1000000});
-var tx13_0_V10 = tokenTraderFactoryV10.createTradeContract(token0Address, "11111000000000000000000", "22222000000000000000000", "10000", true, true, {from: maker2Account, gas: 1000000});
-var tx13_1_V10 = tokenTraderFactoryV10.createTradeContract(token1Address, "1111100000000000000000", "2222200000000000000000", "10000", true, true, {from: maker2Account, gas: 1000000});
-var tx13_2_V10 = tokenTraderFactoryV10.createTradeContract(token2Address, "111110000000000000000", "222220000000000000000", "10000", true, true, {from: maker2Account, gas: 1000000});
-var tx13_8_V10 = tokenTraderFactoryV10.createTradeContract(token8Address, "111110000000000", "222220000000000", "10000", true, true, {from: maker2Account, gas: 1000000});
-var tx13_18_V10 = tokenTraderFactoryV10.createTradeContract(token18Address, "11111", "22222", "10000", true, true, {from: maker2Account, gas: 1000000});
+var tx13_1 = eth.sendTransaction({from: tokenOwnerAccount, to: tokenAddress, gas: 400000, value: web3.toWei("100", "ether")});
+var tx13_2 = token.transfer(account2, "10000000000000000000", {from: tokenOwnerAccount, gas: 100000});
 while (txpool.status.pending > 0) {
 }
-printTxData("tx13_0", tx13_0);
 printTxData("tx13_1", tx13_1);
 printTxData("tx13_2", tx13_2);
-printTxData("tx13_8", tx13_8);
-printTxData("tx13_18", tx13_18);
-printTxData("tx13_0_V10", tx13_0_V10);
-printTxData("tx13_1_V10", tx13_1_V10);
-printTxData("tx13_2_V10", tx13_2_V10);
-printTxData("tx13_8_V10", tx13_8_V10);
-printTxData("tx13_18_V10", tx13_18_V10);
 printBalances();
-failIfGasEqualsGasUsed(tx13_0, testMessage + " Token0");
-failIfGasEqualsGasUsed(tx13_1, testMessage + " Token1");
-failIfGasEqualsGasUsed(tx13_2, testMessage + " Token2");
-failIfGasEqualsGasUsed(tx13_8, testMessage + " Token8");
-failIfGasEqualsGasUsed(tx13_18, testMessage + " Token18");
-failIfGasEqualsGasUsed(tx13_0_V10, testMessage + " Token0");
-failIfGasEqualsGasUsed(tx13_1_V10, testMessage + " Token1");
-failIfGasEqualsGasUsed(tx13_2_V10, testMessage + " Token2");
-failIfGasEqualsGasUsed(tx13_8_V10, testMessage + " Token8");
-failIfGasEqualsGasUsed(tx13_18_V10, testMessage + " Token18");
+passIfGasEqualsGasUsed(tx13_1, testMessage + " - CHECK no ethers moved");
+failIfGasEqualsGasUsed(tx13_2, testMessage + " - CHECK no tokens moved");
+printContractDynamicDetails();
 console.log("RESULT: ");
+
+// -----------------------------------------------------------------------------
+var testMessage = "Test 1.4 Change Ownership";
+console.log("RESULT: " + testMessage);
+var tx14_1 = token.transferOwnership(minerAccount, {from: tokenOwnerAccount, gas: 100000});
+while (txpool.status.pending > 0) {
+}
+var tx14_2 = token.acceptOwnership({from: minerAccount, gas: 100000});
+while (txpool.status.pending > 0) {
+}
+printTxData("tx14_1", tx14_1);
+printTxData("tx14_2", tx14_2);
+printBalances();
+failIfGasEqualsGasUsed(tx14_1, testMessage + " - Change owner");
+failIfGasEqualsGasUsed(tx14_2, testMessage + " - Accept ownership");
+printContractDynamicDetails();
+console.log("RESULT: ");
+
+exit;
+
+
+var startBlock = eth.blockNumber;
 var endBlock = eth.blockNumber;
 
 // Get TokenTrader address
@@ -232,7 +209,6 @@ failIfGasEqualsGasUsed(tx15_2, testMessage + " Token2");
 failIfGasEqualsGasUsed(tx15_8, testMessage + " Token8");
 failIfGasEqualsGasUsed(tx15_18, testMessage + " Token18");
 console.log("RESULT: ");
-
 
 exit;
 
