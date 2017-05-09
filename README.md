@@ -12,6 +12,8 @@ Following are alternative block explorer views of this contract:
 
 I have offered to fix, test and audit the code, so here is the repository with the fix, tests and [security audit](SecurityAudit.md).
 
+I have also offered to help him migrate the token balances from the old RARE token contract to the new RARE token contract. 
+
 <br />
 
 <hr />
@@ -31,6 +33,16 @@ I have offered to fix, test and audit the code, so here is the repository with t
 * Completed [#3 Remove freezeAccount(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/3)
 * Completed [#4 Remove approveAndCall(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/4)
 * Completed [#5 Remove buy(), sell(...), setPrices(...) functions](https://github.com/bokkypoobah/RAREPeperiumToken/issues/5)
+
+## Deployment Steps
+
+* [] MC to inform users to halt transfers of the old tokens after a specified block in the near future
+* [] BK to extract the token balances for all accounts at the specified block
+* [] BK to fill the new token contract with the token balances for all accounts
+* [] BK to seal the new token contract
+* [] BK to reconcile the token numbers between the old and new token contracts
+* [] BK to call `token.transferOwnership(...)` to transfer the contract to MC's account
+* [] MC to call `token.acceptOwnership()` to accept the transfer of the contract
 
 <br />
 

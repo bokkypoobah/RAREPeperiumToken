@@ -102,10 +102,29 @@ failIfGasEqualsGasUsed(tx13_2, testMessage + " - CHECK no tokens moved");
 printContractDynamicDetails();
 console.log("RESULT: ");
 
+
 // -----------------------------------------------------------------------------
 var testMessage = "Test 1.4 Change Ownership";
 console.log("RESULT: " + testMessage);
 var tx14_1 = token.transferOwnership(minerAccount, {from: tokenOwnerAccount, gas: 100000});
+while (txpool.status.pending > 0) {
+}
+var tx14_2 = token.acceptOwnership({from: minerAccount, gas: 100000});
+while (txpool.status.pending > 0) {
+}
+printTxData("tx14_1", tx14_1);
+printTxData("tx14_2", tx14_2);
+printBalances();
+failIfGasEqualsGasUsed(tx14_1, testMessage + " - Change owner");
+failIfGasEqualsGasUsed(tx14_2, testMessage + " - Accept ownership");
+printContractDynamicDetails();
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var testMessage = "Test 1.5 approve() And transferFrom()";
+console.log("RESULT: " + testMessage);
+var tx15_1 = token.transferOwnership(minerAccount, {from: tokenOwnerAccount, gas: 100000});
 while (txpool.status.pending > 0) {
 }
 var tx14_2 = token.acceptOwnership({from: minerAccount, gas: 100000});
