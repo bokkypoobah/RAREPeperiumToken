@@ -42,7 +42,8 @@ function getBalancesAndCompress(accounts) {
         if (amount.greaterThan(0)) {
             balances.push(v.toString(10));
             acc = acc.add(amount);
-            if (i%100 === 0) console.log("Processed: " + i);
+            // if (i%100 === 0) console.log("Processed: " + i);
+            console.log(i + " " + accounts[i] + " " + amount.div(1e8) + " " + amount);
         }
     }
     console.log("Added Balance = "+ acc.toString(10));
@@ -54,6 +55,12 @@ var accounts = getAccounts();
 console.log(JSON.stringify(accounts));
 var balances = getBalancesAndCompress(accounts);
 // console.log(JSON.stringify(balances, null, 2));
-console.log(JSON.stringify(balances));
+// console.log(JSON.stringify(balances));
+
+var chunk = 10;
+for (var i = 0; i < balances.length; i += chunk) {
+    var balancesChunk = balances.slice(i, i+chunk);
+    console.log(i + " " + JSON.stringify(balancesChunk));
+}
 
 EOF
