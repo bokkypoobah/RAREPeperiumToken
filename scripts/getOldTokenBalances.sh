@@ -7,7 +7,8 @@
 # Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd 2017. The MIT Licence.
 # ----------------------------------------------------------------------------------------------
 
-geth attach rpc:http://192.168.4.120:8545 << EOF
+# geth attach rpc:http://192.168.4.120:8545 << EOF
+geth attach rpc:http://localhost:8545 << EOF > oldTokenBalances.txt
 
 var D160 = new BigNumber("10000000000000000000000000000000000000000", 16);
 var tokenAddress = "0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437";
@@ -21,46 +22,58 @@ function getAccounts() {
   var accounts = {};
   var transferEventsFilter = token.Transfer({}, {fromBlock: fromBlock, toBlock: toBlock});
   var transferEvents = transferEventsFilter.get();
-  var i;
-  for (i = 0; i < transferEvents.length; i++) {
+  for (var i = 0; i < transferEvents.length; i++) {
     var transferEvent = transferEvents[i];
     console.log(JSON.stringify(transferEvent));
     accounts[transferEvent.args._from] = 1;
     accounts[transferEvent.args._to] = 1;
   }
+  // Add owner address
+  accounts["0x00011675f9d83C2fBBD93883F056093BA322e600"] = 1;
   return Object.keys(accounts);
 }
 
 function getBalancesAndCompress(accounts) {
-    var i;
     var balances = [];
-    var acc = new BigNumber(0);
-    for (i = 0; i < accounts.length; i++) {
+    var totalBalance = new BigNumber(0);
+    for (var i = 0; i < accounts.length; i++) {
         var addressNum = new BigNumber(accounts[i].substring(2), 16);
         var amount = token.balanceOf(accounts[i], toBlock);
         var v = D160.mul(amount).add(addressNum);
         if (amount.greaterThan(0)) {
             balances.push(v.toString(10));
-            acc = acc.add(amount);
+            totalBalance = totalBalance.add(amount);
             // if (i%100 === 0) console.log("Processed: " + i);
-            console.log(i + " " + accounts[i] + " " + amount.div(1e8) + " " + amount);
+            console.log("BALANCE: " + i + "\t" + accounts[i] + "\t" + amount.div(1e8) + "\t" + amount);
         }
     }
-    console.log("Added Balance = "+ acc.toString(10));
-    console.log("totalSupply = " + token.totalSupply().toString(10));
+    console.log("Total balance=" + totalBalance.toString(10));
+    console.log("totalSupply=" + token.totalSupply().toString(10));
     return balances;
 }
 
 var accounts = getAccounts();
-console.log(JSON.stringify(accounts));
+// console.log(JSON.stringify(accounts));
+console.log("number of accounts, some may have a zero balances=" + accounts.length);
 var balances = getBalancesAndCompress(accounts);
+console.log("number of accounts+balances, only with non-zero balances=" + balances.length);
 // console.log(JSON.stringify(balances, null, 2));
 // console.log(JSON.stringify(balances));
 
 var chunk = 10;
+var balancesArray = [];
+var numberOfItemsChunked = 0;
 for (var i = 0; i < balances.length; i += chunk) {
     var balancesChunk = balances.slice(i, i+chunk);
-    console.log(i + " " + JSON.stringify(balancesChunk));
+    balancesArray.push(balancesChunk);
+    numberOfItemsChunked += balancesChunk.length;
+    console.log("Chunk\t" + i + "\t" + JSON.stringify(balancesChunk));
 }
 
+console.log("number of accounts+balances, chunked=" + numberOfItemsChunked);
+console.log("DATA: " + JSON.stringify(balancesArray, null, 2));
+
 EOF
+
+grep "BALANCE: " oldTokenBalances.txt | sed "s/BALANCE: //" > oldTokenBalancesByAccounts.txt
+grep "DATA: " oldTokenBalances.txt | sed "s/DATA: //" > oldTokenBalancesData.txt
