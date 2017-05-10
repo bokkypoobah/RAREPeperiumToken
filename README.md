@@ -3,7 +3,10 @@ RARE Peperium Token
 
 The owner of the RARE Peperium contract asked why the TokenTraderFactory contract was now working with their supposedly ERC20-compliant token.
 
-I had a quick scan of the emailed token contract code and found a bug in the RARE Peperium contract deployed to [0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437](https://etherscan.io/address/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437):
+I had a quick scan of the emailed token contract code and found some bugs in the RARE Peperium contract deployed to [0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437](https://etherscan.io/address/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437):
+
+* The first issue is that the totalSupply is reported as 115792089237316195423570985008687907853269984665640564039457583907913129639936 . The intended  total supply is 100,000,000. See https://github.com/bokkypoobah/RAREPeperiumToken/blob/master/scripts/oldTokenBalances.txt#L735 .
+* Extracting each account balance and summing the balance for all accounts results in the number 9900000000000000 which is 99,000,000.00000000 . See https://github.com/bokkypoobah/RAREPeperiumToken/blob/master/scripts/oldTokenBalances.txt#L734 and [data/EthplorerOldTokenBalances_20170510.xls](data/EthplorerOldTokenBalances_20170510.xls).
 
 Following are alternative block explorer views of this contract:
 
