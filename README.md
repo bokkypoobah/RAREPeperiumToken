@@ -25,6 +25,11 @@ I have also offered to help him migrate the token balances from the old RARE tok
 
 * Hardcoded the initial supply of 100 million units with 8 decimals, symbol R$, name RARE
 
+## Conversation with Michael C May 11 2017
+
+* The missing 1,000,000 is due to the burning of this amount of tokens to signify the RARE release date.
+* The total supply will have to be adjusted for this burning events
+
 <br />
 
 <hr />
