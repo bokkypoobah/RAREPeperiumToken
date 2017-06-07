@@ -44,13 +44,57 @@ I have also offered to help him migrate the token balances from the old RARE tok
 
 ## Deployment Steps
 
-* [] MC to inform users to halt transfers of the old tokens after a specified block in the near future
-* [] BK to extract the token balances for all accounts at the specified block
-* [] BK to fill the new token contract with the token balances for all accounts
+* [x] MC to inform users to halt transfers of the old tokens after a specified block in the near future
+* [x] BK to extract the token balances for all accounts at the specified block
+* [x] BK to fill the new token contract with the token balances for all accounts
 * [] BK to seal the new token contract
 * [] BK to reconcile the token numbers between the old and new token contracts
 * [] BK to call `token.transferOwnership(...)` to transfer the contract to MC's account
 * [] MC to call `token.acceptOwnership()` to accept the transfer of the contract
+
+## Deployment Cost
+
+Following are the transaction cost of deploying the new RARE token contract, with the 323 account balances transferred totaling 0.085889375 ETH:
+
+[0xa052ae71](https://etherscan.io/tx/0xa052ae713568895795d4ce4f0184135e2315ebfb0ddd0f98f9ef4a10f4ddaa1e) 0.02079118543703
+[0x8423def6](https://etherscan.io/tx/0x8423def6ac9e422dbd8fc3454b5a03c87d8ade40ef2c94a39f91b5538a30e437) 0.00757892
+[0xf681a8f0](https://etherscan.io/tx/0xf681a8f0fb5d281a622189a814fd5742341dc734eb2a3367c7cadaf93396bebb) 0.00502287
+[0x83d758f3](https://etherscan.io/tx/0x83d758f343271010d5b7a61ed261b3c6b9a3d9d1c7384d28d60005ceb3d7ef52) 0.0049126
+[0x838dd32e](https://etherscan.io/tx/0x838dd32e0ecfc2bcf752bd81b9a5c2bf30772eaf46e8df6b4dae0eedadbb133b) 0.00491362
+[0x6a90885b](https://etherscan.io/tx/0x6a90885bd390e60cc79d49062e0b34dd7b4f491d8912c2d7bfad8c403f7db664) 0.00491208
+[0xec72251e](https://etherscan.io/tx/0xec72251ede76e871ec9f89e1b4b82bd8451858987ed6006fe55d1e19557399cc) 0.00491157
+[0xa101e698](https://etherscan.io/tx/0xa101e698afbf065a283adb679be162c9067e68030ea8e95e74872faae8be55b3) 0.00491311
+[0x032843d7](https://etherscan.io/tx/0x032843d73f7ddf9e8389b79b3e79e5c10495dc82b0d4d35969ba88296df81f43) 0.00491157
+[0x19741741](https://etherscan.io/tx/0x19741741b78c140f1363d4012b7e4f11c083cf3a58a006073baec925636bad33) 0.00491055
+[0xf1d4b376](https://etherscan.io/tx/0xf1d4b376164a1dc2d9be00c28d4323a645a54aa59cf1d2ee8b50cb4349f4f9a9) 0.00491157
+[0x454bb51f](https://etherscan.io/tx/0x454bb51f91943d473fb3870f95de7583475a5f3e490e12d42bae8151402252c6) 0.00491925
+[0x2cdeb3ab](https://etherscan.io/tx/0x2cdeb3abf9d7fa1d177e676afeeba25fc01aa028816ed5f4492140023f20617c) 0.0049172
+[0xbb67c6b6](https://etherscan.io/tx/0xbb67c6b6b727163eb31fc8ccc41d3b701b27a9ea38a6ec16fc964bd1a2e7d11f) 0.00302516
+[0x5ce235c6](https://etherscan.io/tx/0x5ce235c608945b141d3f3c012ddc84f63d4e641ffbc53fc6243429c43d4dc85f) 0.00033812
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <br />
 
