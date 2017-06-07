@@ -46,6 +46,7 @@ I have also offered to help him migrate the token balances from the old RARE tok
 
 * [x] MC to inform users to halt transfers of the old tokens after a specified block in the near future
 * [x] BK to extract the token balances for all accounts at the specified block - snapshot at block=3834349 time=1496833201 Wed, 07 Jun 2017 11:00:01 UTC
+* [x] BK to deploy new token contract - address [0x5ddab66da218fb05dfeda07f1afc4ea0738ee234](https://ethplorer.io/address/0x5ddab66da218fb05dfeda07f1afc4ea0738ee234)
 * [x] BK to fill the new token contract with the token balances for all accounts
 * [x] BK to seal the new token contract
 * [x] BK to reconcile the token numbers between the old and new token contracts - see [scripts/reconcile.sh](scripts/reconcile.sh) and [scripts/reconcileBalances.txt](scripts/reconcileBalances.txt)
