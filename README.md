@@ -45,10 +45,10 @@ I have also offered to help him migrate the token balances from the old RARE tok
 ## Deployment Steps
 
 * [x] MC to inform users to halt transfers of the old tokens after a specified block in the near future
-* [x] BK to extract the token balances for all accounts at the specified block
+* [x] BK to extract the token balances for all accounts at the specified block - snapshot at block=3834349 time=1496833201 Wed, 07 Jun 2017 11:00:01 UTC
 * [x] BK to fill the new token contract with the token balances for all accounts
-* [] BK to seal the new token contract
-* [] BK to reconcile the token numbers between the old and new token contracts
+* [x] BK to seal the new token contract
+* [x] BK to reconcile the token numbers between the old and new token contracts - see [scripts/reconcile.sh](scripts/reconcile.sh) and [scripts/reconcileBalances.txt](scripts/reconcileBalances.txt)
 * [] BK to call `token.transferOwnership(...)` to transfer the contract to MC's account
 * [] MC to call `token.acceptOwnership()` to accept the transfer of the contract
 
