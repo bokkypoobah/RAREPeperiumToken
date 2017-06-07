@@ -15,8 +15,10 @@ var tokenAddress = "0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437";
 var tokenABI = [{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"totalSupply","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}];
 var token = web3.eth.contract(tokenABI).at(tokenAddress);
 var fromBlock = 3366003;
-var toBlock = "latest";
+var toBlock = 3834349;
 // var toBlock = parseInt(fromBlock) + 1000;
+var block = eth.getBlock(toBlock);
+console.log("BALANCE: snapshot at block=" + block.number + " time=" + block.timestamp + " " + new Date(block.timestamp * 1000).toUTCString());
 
 function getAccounts() {
   var accounts = {};
@@ -60,14 +62,14 @@ console.log("number of accounts+balances, only with non-zero balances=" + balanc
 // console.log(JSON.stringify(balances, null, 2));
 // console.log(JSON.stringify(balances));
 
-var chunk = 10;
+var chunk = 20;
 var balancesArray = [];
 var numberOfItemsChunked = 0;
 for (var i = 0; i < balances.length; i += chunk) {
     var balancesChunk = balances.slice(i, i+chunk);
     balancesArray.push(balancesChunk);
     numberOfItemsChunked += balancesChunk.length;
-    console.log("Chunk\t" + i + "\t" + JSON.stringify(balancesChunk));
+    console.log("DATA: " + i + "\t" + JSON.stringify(balancesChunk, null, 2));
 }
 
 console.log("number of accounts+balances, chunked=" + numberOfItemsChunked);
