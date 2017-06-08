@@ -62,7 +62,7 @@ Ownership of the contract is in the process of being transferred to Michael C.
 * [x] BK to seal the new token contract
 * [x] BK to reconcile the token numbers between the old and new token contracts - see [scripts/reconcile.sh](scripts/reconcile.sh) and [scripts/reconcileBalances.txt](scripts/reconcileBalances.txt)
 * [x] BK to call `token.transferOwnership(...)` to transfer the contract to MC's account
-* [] MC to call `token.acceptOwnership()` to accept the transfer of the contract
+* [ ] MC to call `token.acceptOwnership()` to accept the transfer of the contract
 
 <br />
 

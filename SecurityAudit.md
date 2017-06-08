@@ -1,4 +1,4 @@
-# Fixing And Security Auditing The RARE Peperium Token (Work in progress)
+# Fixing And Security Auditing The RARE Peperium Token
 
 Michael C, the owner of the R$ RARE token at [0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437](https://etherscan.io/address/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437) had troubles listing the R$ tokens for sale and purchase on https://cryptoderivatives.market/ . [EtherScan](https://etherscan.io/token/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437) displays an "Oops" error while [Ethplorer](https://ethplorer.io/address/0x584aa8297edfcb7d8853a426bb0f5252c4af9437) displayed a Total Supply of 1.157920892373162e+69 R$ .
 
@@ -24,8 +24,9 @@ I offered to fix, test and audit the R$ token code. The fixed contract can be fo
 
 ## Background And History
 * Apr 24 2017 Michael C agreed for the unnecessary `mintToken(...)`, `freezeAccount(...)`, `approveAndCall(...)`, `buy()`, `sell(...)` and `setPrices(...)` functions to be removed.
-* May 08 2017 Bok Consulting completed (almost) the changes to [contracts/RAREToken.sol](contracts/RAREToken.sol) and the test script [test/01_test1.sh](test/01_test1.sh) with the generated result documented in [test/test1results.txt](test/test1results.txt)
-* May 09 2017 Bok Consulting completed this security audit report
+* Jun 08 2017 Bok Consulting completed the changes to [contracts/RAREToken.sol](contracts/RAREToken.sol) and the test script [test/01_test1.sh](test/01_test1.sh) with the generated result documented in [test/test1results.txt](test/test1results.txt)
+* Jun 08 2017 Bok Consulting completed this security audit report
+* Jun 08 2017 Bok Consulting deployed the new token contracts, transferred the old token balances to the new token contract and reconciled the figures.
 
 <br />
 
