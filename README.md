@@ -3,10 +3,9 @@ RARE Peperium Token
 
 The owner of the RARE Peperium contract asked why the TokenTraderFactory contract was now working with their supposedly ERC20-compliant token.
 
-I had a quick scan of the emailed token contract code and found some bugs in the RARE Peperium contract deployed to [0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437](https://etherscan.io/address/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437):
+I had a quick scan of the emailed token contract code and found some bugs in the RARE Peperium contract deployed to [0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437](https://etherscan.io/address/0x584AA8297eDfCB7d8853a426bb0f5252C4aF9437).
 
-* The first issue is that the totalSupply is reported as 115792089237316195423570985008687907853269984665640564039457583907913129639936 . The intended  total supply is 100,000,000. See https://github.com/bokkypoobah/RAREPeperiumToken/blob/master/scripts/oldTokenBalances.txt#L735 .
-* Extracting each account balance and summing the balance for all accounts results in the number 9900000000000000 which is 99,000,000.00000000 . See https://github.com/bokkypoobah/RAREPeperiumToken/blob/master/scripts/oldTokenBalances.txt#L734 and [data/EthplorerOldTokenBalances_20170510.xls](data/EthplorerOldTokenBalances_20170510.xls).
+One of the issues was that totalSupply is reported as 115792089237316195423570985008687907853269984665640564039457583907913129639936 . The intended  total supply is 100,000,000.
 
 Following are alternative block explorer views of this contract:
 
@@ -15,7 +14,15 @@ Following are alternative block explorer views of this contract:
 
 I have offered to fix, test and audit the code, so here is the repository with the fix, tests and [security audit](SecurityAudit.md).
 
-I have also offered to help him migrate the token balances from the old RARE token contract to the new RARE token contract. 
+I have also offered to help him migrate the token balances from the old RARE token contract to the new RARE token contract.
+
+The new token contract has now been deployed to [0x5ddab66da218fb05dfeda07f1afc4ea0738ee234](https://etherscan.io/address/0x5ddab66da218fb05dfeda07f1afc4ea0738ee234#code). 
+
+A snapshot of the old token contract account balances was taken at block #3834349 with the timestamp 1496833201 Wed, 07 Jun 2017 11:00:01 UTC . 
+
+These balances were transferred to the new token contract, reconciled (see [scripts/reconcileBalances.txt](scripts/reconcileBalances.txt)) and the contract sealed. 
+ 
+Ownership of the contract is in the process of being transferred to Michael C.
 
 <br />
 
@@ -36,11 +43,15 @@ I have also offered to help him migrate the token balances from the old RARE tok
 
 ## Actions
 
-* Completed [#1 Remove the mintToken(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/1)
-* Completed [#2 Fix the totalSupply issue](https://github.com/bokkypoobah/RAREPeperiumToken/issues/2)
-* Completed [#3 Remove freezeAccount(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/3)
-* Completed [#4 Remove approveAndCall(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/4)
-* Completed [#5 Remove buy(), sell(...), setPrices(...) functions](https://github.com/bokkypoobah/RAREPeperiumToken/issues/5)
+* [x] [#1 Remove the mintToken(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/1)
+* [x] [#2 Fix the totalSupply issue](https://github.com/bokkypoobah/RAREPeperiumToken/issues/2)
+* [x] [#3 Remove freezeAccount(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/3)
+* [x] [#4 Remove approveAndCall(...) function](https://github.com/bokkypoobah/RAREPeperiumToken/issues/4)
+* [x] [#5 Remove buy(), sell(...), setPrices(...) functions](https://github.com/bokkypoobah/RAREPeperiumToken/issues/5)
+
+<br />
+
+<hr />
 
 ## Deployment Steps
 
@@ -50,8 +61,12 @@ I have also offered to help him migrate the token balances from the old RARE tok
 * [x] BK to fill the new token contract with the token balances for all accounts
 * [x] BK to seal the new token contract
 * [x] BK to reconcile the token numbers between the old and new token contracts - see [scripts/reconcile.sh](scripts/reconcile.sh) and [scripts/reconcileBalances.txt](scripts/reconcileBalances.txt)
-* [] BK to call `token.transferOwnership(...)` to transfer the contract to MC's account
+* [x] BK to call `token.transferOwnership(...)` to transfer the contract to MC's account
 * [] MC to call `token.acceptOwnership()` to accept the transfer of the contract
+
+<br />
+
+<hr />
 
 ## Deployment Cost
 
